@@ -3,28 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLogic.Interfaces;
+using File_Tree.Mappers;
+using File_Tree.Models;
 
 namespace File_Tree.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IDirectoryManager _manager;
+        public HomeController(IDirectoryManager manager)
+        {
+            _manager = manager;
+        }
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var toReturn = new DNode().Map(_manager.GetLargeDirectoryStructure());
+            return View(toReturn);
         }
     }
 }

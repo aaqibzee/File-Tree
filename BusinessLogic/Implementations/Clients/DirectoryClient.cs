@@ -18,7 +18,7 @@ namespace BusinessLogic.Implementations.Clients
             node.Level = level;
 
             var files = info.GetFiles();
-            if (files.Count() > 0)
+            if (files.Any())
             {
                 node.Files = new List<string>();
                 for (int i = 0; i < files.Count(); i++)
@@ -28,10 +28,10 @@ namespace BusinessLogic.Implementations.Clients
             }
 
             var dirs = info.GetDirectories();
-            if (dirs.Count() > 0)
+            if (dirs.Any())
             {
+                level++;
                 node.Directories = new List<DNodeModel>();
-                ++level;
                 for (int i = 0; i < info.GetDirectories().Count(); i++)
                 {
                     node.Directories.Add(GetDirectoryStructure(dirs[i], level));
