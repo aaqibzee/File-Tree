@@ -18,7 +18,7 @@ namespace File_Tree.Controllers
         }
         public ActionResult Index()
         {
-            var toReturn = new DNode().Map(_manager.GetLargeDirectoryStructure());
+            var toReturn = new DNode().Map(_manager.GetSmallDirectoryStructure());
             return View(toReturn);
         }
     }
